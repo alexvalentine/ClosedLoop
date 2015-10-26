@@ -1,0 +1,72 @@
+{
+    "feed": 40, 
+    "heaven": -0.5, 
+    "sensor_groove_offset": [
+        -184.917, 
+        -23.485
+    ], 
+    "home_positions": {
+        "A": [
+            399.49445000000003, 
+            342.4104, 
+            -80.92529649786661
+        ], 
+        "B": [
+            298.98135, 
+            344.19665, 
+            -82.9978067932866
+        ]
+    }, 
+    "profilometer_axis": "D", 
+    "substrate_refs": {}, 
+    "axes": [
+        "A", 
+        "B"
+    ], 
+    "middle_search_start": -85, 
+    "profile_feed": 15, 
+    "z_constant": 42.880204, 
+    "z_ref": -96.9776012154731, 
+    "calfile_path": "calfile.cal", 
+    "groove_crosshair": [
+        68.8500107931288, 
+        329.150035490227
+    ], 
+    "substrate_origins": {}, 
+    "z_ref_location": [
+        -20, 
+        -50
+    ], 
+    "axes_data": {
+        "A": {
+            "number": 4, 
+            "alignment_location": [
+                586.075, 
+                367.82
+            ]
+        }, 
+        "C": {
+            "number": 6, 
+            "alignment_location": [
+                378.075, 
+                367.82
+            ]
+        }, 
+        "B": {
+            "number": 5, 
+            "alignment_location": [
+                482.075, 
+                367.82
+            ]
+        }, 
+        "D": {
+            "number": 7, 
+            "alignment_location": [
+                299.075, 
+                367.82
+            ]
+        }
+    }, 
+    "substrate_profiles": {}, 
+    "substrates": {}
+}
