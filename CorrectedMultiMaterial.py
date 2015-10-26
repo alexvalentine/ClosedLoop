@@ -35,7 +35,7 @@ Description:
 
 from mecode import G
 
-from ClosedLoop_aerotech_automator import aerotech_automator
+from aerotech_automator import AerotechAutomator
 
 
 
@@ -69,7 +69,9 @@ cur_dir = ''.join((dir+'/') for dir in splitted[:n-1])
 
 # Code below added when previous code was commented out:
 
-importFileDir = cur_dir+"\ClosedLoop\automation_values.json"
+print cur_dir+"automation_values_ADV.json" 
+
+importFileDir = r"C:\Users\Lewis Group\Documents\GitHub\ClosedLoop\automation_values_ADV.json"
 
 #------------------------------------------------------------------------------
 
