@@ -40,12 +40,12 @@ emb3DPGlobals.init_G(exportFileDir)
 ################################################################################
 
 # Set this for each print:
-first_layer_bottom = -60.130        # This is the zero registration taken at the bottom of the the first mold layer
-start_pos = [477.362, 130.300]                # This is the X, Y start coordinate, which should be +12 mm in X from the left most edge of the mold on it's midline
-zero_on_curvature_sensor_matrix = -58.589   # added 2015.10.12, to get the exact height of the curature sensor matrix (wasn't getting good contact with this layer due to squeeging)
+first_layer_bottom = -50.327       # This is the zero registration taken at the bottom of the the first mold layer
+start_pos = [477.823, 131.412]                # This is the X, Y start coordinate, which should be +12 mm in X from the left most edge of the mold on it's midline
+zero_on_curvature_sensor_matrix = -48.711   # added 2015.10.12, to get the exact height of the curature sensor matrix (wasn't getting good contact with this layer due to squeeging)
 
 # Set these for each mold layer:
-first_layer_thickness = 1.8     # Thickness of the layer for the curvature sensor, in mm
+first_layer_thickness = 2.0     # Thickness of the layer for the curvature sensor, in mm
 second_layer_thickness = 12.7       # Thickness of the layer for the actuator, in mm
 third_layer_thickness = 3.0           # Thickness of the layer for the contact sensor, in mm
 layer_width = 15
