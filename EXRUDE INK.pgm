@@ -53,9 +53,9 @@ DVAR $extrudepressure2
 FILECLOSE
 
 $COM = 1
-$extrudepressure1 = 90
+$extrudepressure1 = 70
 $COM2 = 4
-$extrudepressure2 = 70
+$extrudepressure2 = 55
 
 Call setPress P$COM Q$extrudepressure1
 Call setPress P$COM2 Q$extrudepressure2

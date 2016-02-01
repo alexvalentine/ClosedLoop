@@ -38,7 +38,7 @@ num_layers = ClosedLoopActuator_ActuatorOnly.num_layers
 ### SENSOR PRINTING PARAMETERS - For printing with a glass, 30 um tip, 50 psi:
 glass_tip_speed_factor = 1                       # = 1 for no glass tip, 0.2 was REALLY slow when printing with 30 wt% F127 at 95 psi.
 high_F127_conc_inlet_speed_factor = 0.25
-sensor_print_speed = glass_tip_speed_factor * 6  # 5 changed on 8/10/15
+sensor_print_speed = 4  
 sensor_width = 5
 sensor_width = 4.0 # added 2015.10.12
 sensor_height_offset = 0.5
@@ -48,28 +48,28 @@ sensor_length_offset = 3
 curvature_sensor_width = 4.0
 #curvature_sensor_width =  # added 2015.10.11
 curvature_sensor_length_offset = 3
-curvature_sensor_print_speed = 3
+curvature_sensor_print_speed = 4
 
 ####### FANCY SENSOR PARAMETERS ########
 # CONNECTOR PARAMETERS (connectors go below bladders)
 connector_height_offset = 1.3 # distance below the bladder print height 
 connector_offset= (ClosedLoopActuator_ActuatorOnly.spacer_spacing/2 - ClosedLoopActuator_ActuatorOnly.spacer_width)/2 #halfway between spacers in x-direction
-connector_print_speed = glass_tip_speed_factor*2 #1.5 # Pressure: 75 psi changed on 8/10/15
+connector_print_speed = 4 #1.5 # Pressure: 75 psi changed on 8/10/15
 # TOP PARAMETERS (tops go above spacers)
 top_height_offset = 1.7 + 1 #how far above spacers, 0.7 added on 20151005, changed to 1 on another print on 20151005
 top_y_offset = 0.375*ClosedLoopActuator_ActuatorOnly.spacer_length # distance in from the edges of the spacers (currently halfway) in the y-direction
 
-spoke_print_speed = 2*glass_tip_speed_factor
-top_print_speed = 2*glass_tip_speed_factor #1.5 changed on 8/10/15
+spoke_print_speed = 4
+top_print_speed = 4 #1.5 changed on 8/10/15
 spoke_print_speed = top_print_speed #spokes connect connectors and tops 
 
 #### INLET PARAMETERS #####
-fancy_sensor_inlet_print_speed = 0.5*glass_tip_speed_factor
+fancy_sensor_inlet_print_speed = 2
 inlet_length_fancy_sensor = 6.5
 inlet_length_bus_line = 6.5
 bus_line_inlet_print_speed = 0.5
-sensor_inlet_print_speed = 0.5*glass_tip_speed_factor*high_F127_conc_inlet_speed_factor
-sensor_inlet_connector_print_speed = 2 * sensor_inlet_print_speed
+sensor_inlet_print_speed = 2
+sensor_inlet_connector_print_speed = 2 
 inlet_length_sensor = 6.5
 
 # Start with substrate_zero at 1 so it will throw a fault on the printer unless
@@ -98,6 +98,9 @@ def set_print_heights(mold_layer_bottoms):
     curvature_sensor_print_height_offset = (mold_layer_bottoms[0] + mold_layer_bottoms[1])/2
     contact_sensor_print_height_offset = (mold_layer_bottoms[3] + mold_layer_bottoms[2])/2
     
+    curvature_sensor_print_height_offset = mold_layer_bottoms[0] + 0.8 # added 2016.01.28
+    
+    
     curvature_layer_bottom = curvature_sensor_print_height_offset
     spacer_print_height = mold_layer_bottoms[1]
     connector_print_height = ClosedLoopActuator_ActuatorOnly.bladder_print_height - connector_height_offset
@@ -111,14 +114,14 @@ def print_curvature_sensor():
     emb3DMatrixPrinting.move_x(ClosedLoopActuator_ActuatorOnly.bladder_spacing*(num_bladders-0.5)+(curvature_sensor_length_offset+2))
     emb3DMatrixPrinting.print_mode(print_height_abs = curvature_layer_bottom, print_speed = 20)
     emb3DPGlobals.g.feed(curvature_sensor_print_speed)
-    for meander in xrange(2):
-        emb3DMatrixPrinting.move_x(-1*ClosedLoopActuator_ActuatorOnly.bladder_spacing*(num_bladders-0.5)-(curvature_sensor_length_offset+2))
-        emb3DMatrixPrinting.move_y(-1*curvature_sensor_width/5)
-        emb3DMatrixPrinting.move_x(ClosedLoopActuator_ActuatorOnly.bladder_spacing*(num_bladders-0.5)+(curvature_sensor_length_offset+2))
-        emb3DMatrixPrinting.move_y(-1*curvature_sensor_width/5)
+    #for meander in xrange(2):
     emb3DMatrixPrinting.move_x(-1*ClosedLoopActuator_ActuatorOnly.bladder_spacing*(num_bladders-0.5)-(curvature_sensor_length_offset+2))
-    emb3DMatrixPrinting.move_y(-1*curvature_sensor_width/5)
+    emb3DMatrixPrinting.move_y(-1*curvature_sensor_width)
     emb3DMatrixPrinting.move_x(ClosedLoopActuator_ActuatorOnly.bladder_spacing*(num_bladders-0.5)+(curvature_sensor_length_offset+2))
+        #emb3DMatrixPrinting.move_y(-1*curvature_sensor_width/5)
+    #emb3DMatrixPrinting.move_x(-1*ClosedLoopActuator_ActuatorOnly.bladder_spacing*(num_bladders-0.5)-(curvature_sensor_length_offset+2))
+    #emb3DMatrixPrinting.move_y(-1*curvature_sensor_width/5)
+    #emb3DMatrixPrinting.move_x(ClosedLoopActuator_ActuatorOnly.bladder_spacing*(num_bladders-0.5)+(curvature_sensor_length_offset+2))
     emb3DMatrixPrinting.travel_mode()
 
 # INLET FOR CURVATURE SENSOR
@@ -323,14 +326,14 @@ def print_contact_sensor():
     emb3DMatrixPrinting.print_mode(print_height_abs = contact_layer_bottom, print_speed = 20)
     emb3DPGlobals.g.feed(curvature_sensor_print_speed)
     emb3DMatrixPrinting.move_y(-1*additional_y_offset_for_inlets)
-    for meander in xrange(2):
-        emb3DMatrixPrinting.move_x(-1*ClosedLoopActuator_ActuatorOnly.bladder_spacing*(num_bladders-0.5)-(curvature_sensor_length_offset+2))
-        emb3DMatrixPrinting.move_y(-1*curvature_sensor_width/5)
-        emb3DMatrixPrinting.move_x(ClosedLoopActuator_ActuatorOnly.bladder_spacing*(num_bladders-0.5)+(curvature_sensor_length_offset+2))
-        emb3DMatrixPrinting.move_y(-1*curvature_sensor_width/5)
+    #for meander in xrange(2):
     emb3DMatrixPrinting.move_x(-1*ClosedLoopActuator_ActuatorOnly.bladder_spacing*(num_bladders-0.5)-(curvature_sensor_length_offset+2))
-    emb3DMatrixPrinting.move_y(-1*curvature_sensor_width/5)
+    emb3DMatrixPrinting.move_y(-1*curvature_sensor_width)
     emb3DMatrixPrinting.move_x(ClosedLoopActuator_ActuatorOnly.bladder_spacing*(num_bladders-0.5)+(curvature_sensor_length_offset+2))
+    #emb3DMatrixPrinting.move_y(-1*curvature_sensor_width/5)
+    #emb3DMatrixPrinting.move_x(-1*ClosedLoopActuator_ActuatorOnly.bladder_spacing*(num_bladders-0.5)-(curvature_sensor_length_offset+2))
+    #emb3DMatrixPrinting.move_y(-1*curvature_sensor_width/5)
+    #emb3DMatrixPrinting.move_x(ClosedLoopActuator_ActuatorOnly.bladder_spacing*(num_bladders-0.5)+(curvature_sensor_length_offset+2))
     emb3DMatrixPrinting.move_y(-1*additional_y_offset_for_inlets)
     emb3DMatrixPrinting.travel_mode()
 
